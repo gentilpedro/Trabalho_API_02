@@ -13,3 +13,48 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Cliente {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String
+  telefone String
+  pedidos  Pedido[]
+}
+
+model Prato {
+  id        Int          @id @default(autoincrement())
+  nome      String
+  descricao String
+  preco     Float
+  itens     ItemPedido[]
+}
+
+model Pedido {
+  id        Int          @id @default(autoincrement())
+  cliente   Cliente      @relation(fields: [clienteId], references: [id])
+  clienteId Int
+  data      DateTime     @default(now())
+  status    String
+  itens     ItemPedido[]
+  pagamento Pagamento?
+}
+
+model ItemPedido {
+  id         Int    @id @default(autoincrement())
+  pedido     Pedido @relation(fields: [pedidoId], references: [id])
+  pedidoId   Int
+  prato      Prato  @relation(fields: [pratoId], references: [id])
+  pratoId    Int
+  quantidade Int
+  subtotal   Float
+}
+
+model Pagamento {
+  id             Int      @id @default(autoincrement())
+  pedido         Pedido   @relation(fields: [pedidoId], references: [id])
+  pedidoId       Int      @unique
+  formaPagamento String
+  valor          Float
+  dataPagamento  DateTime
+}
