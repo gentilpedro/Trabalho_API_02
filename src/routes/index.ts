@@ -1,14 +1,12 @@
-// src/routes/index.ts
 import { Router } from 'express';
-// import clienteRoutes from './cliente.routes';
-// import pedidoRoutes from './pedido.routes';
-// import pratoRoutes from './prato.routes';
+import clienteRoutes from './clientesRoutes';
+import pratoRoutes from './pratosRoutes';
+import pedidoRoutes from './pedidosRoutes';
 
 const router = Router();
 
-// Rotas específicas
-// router.use('/clientes', clienteRoutes);
-// router.use('/pedidos', pedidoRoutes);
-// router.use('/pratos', pratoRoutes);
+router.use('/clientes', clienteRoutes);
+router.use('/pratos', pratoRoutes);
+router.use('/pedidos', pedidoRoutes);
 
 export default router;
