@@ -1,9 +1,9 @@
 // @ts-ignore
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient, Prato } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const criarPrato = async (data: Prisma.PratoCreateInput) => {
+export const criarPrato = async (data:Prato) => {
   return await prisma.prato.create({ data });
 };
 
